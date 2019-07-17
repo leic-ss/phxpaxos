@@ -1,19 +1,22 @@
-[submodule "third_party/gtest"]
-	path = third_party/gtest
+[submodule "deps_src/gtest"]
+	path = deps_src/gtest
 	url = https://github.com/google/googletest
 	branch = release-1.6.0
-[submodule "third_party/gflags"]
-	path = third_party/gflags
+[submodule "deps_src/gflags"]
+	path = deps_src/gflags
 	url = https://github.com/gflags/gflags
-[submodule "third_party/protobuf"]
-	path = third_party/protobuf
+[submodule "deps_src/protobuf"]
+	path = deps_src/protobuf
 	url = https://github.com/google/protobuf
-[submodule "third_party/glog"]
-	path = third_party/glog
+[submodule "deps_src/glog"]
+	path = deps_src/glog
 	url = https://github.com/google/glog
-[submodule "third_party/leveldb"]
-	path = third_party/leveldb
+[submodule "deps_src/leveldb"]
+	path = deps_src/leveldb
 	url = https://github.com/google/leveldb
-[submodule "third_party/gmock"]
-	path = third_party/gmock
+[submodule "deps_src/gmock"]
+	path = deps_src/gmock
 	url = https://github.com/google/googlemock
+[submodule "deps_src/grpc"]
+	path = deps_src/grpc
+	url = https://github.com/grpc/grpc.git

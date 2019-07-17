@@ -4,22 +4,22 @@ PHX_LIB_PATH = $(SRC_BASE_PATH)/.lib
 PHX_SBIN_PATH = $(SRC_BASE_PATH)/.sbin
 PHX_EXTLIB_PATH = $(PHX_LIB_PATH)/extlib
 
-NANOPBPATH=$(SRC_BASE_PATH)/third_party/nanopb/
+NANOPBPATH=$(SRC_BASE_PATH)/deps_src/nanopb/
 
-PROTOBUF_INCLUDE_PATH=$(SRC_BASE_PATH)/third_party/protobuf/include
-GRPC_INCLUDE_PATH=$(SRC_BASE_PATH)/third_party/grpc/include
-LEVELDB_INCLUDE_PATH=$(SRC_BASE_PATH)/third_party/leveldb/include
-GFLAGS_INCLUDE_PATH=$(SRC_BASE_PATH)/third_party/gflags/include
-GLOG_INCLUDE_PATH=$(SRC_BASE_PATH)/third_party/glog/include
+PROTOBUF_INCLUDE_PATH=$(SRC_BASE_PATH)/deps_src/protobuf/include
+GRPC_INCLUDE_PATH=$(SRC_BASE_PATH)/deps_src/grpc/include
+LEVELDB_INCLUDE_PATH=$(SRC_BASE_PATH)/deps_src/leveldb/include
+GFLAGS_INCLUDE_PATH=$(SRC_BASE_PATH)/deps_src/gflags/include
+GLOG_INCLUDE_PATH=$(SRC_BASE_PATH)/deps_src/glog/include
 PHXPAXOS_INCLUDE_PATH=$(SRC_BASE_PATH)/include
 PHXPAXOS_PLUGIN_PATH=$(SRC_BASE_PATH)/plugin/include
 
-PROTOBUF_LIB_PATH=$(SRC_BASE_PATH)/third_party/protobuf/lib
-LEVELDB_LIB_PATH=$(SRC_BASE_PATH)/third_party/leveldb/lib
-GFLAGS_LIB_PATH=$(SRC_BASE_PATH)/third_party/gflags/lib
-GLOG_LIB_PATH=$(SRC_BASE_PATH)/third_party/glog/lib
-GRPC_LIBE_PATH=$(SRC_BASE_PATH)/third_party/grpc/lib
-OPEN_SSL_LIB_PATH=$(SRC_BASE_PATH)/third_party/openssl/lib
+PROTOBUF_LIB_PATH=$(SRC_BASE_PATH)/deps_src/protobuf/lib
+LEVELDB_LIB_PATH=$(SRC_BASE_PATH)/deps_src/leveldb/lib
+GFLAGS_LIB_PATH=$(SRC_BASE_PATH)/deps_src/gflags/lib
+GLOG_LIB_PATH=$(SRC_BASE_PATH)/deps_src/glog/lib
+GRPC_LIBE_PATH=$(SRC_BASE_PATH)/deps_prefix/lib
+OPEN_SSL_LIB_PATH=$(SRC_BASE_PATH)/deps_src/openssl/lib
 PHXPAXOS_LIB_PATH=$(SRC_BASE_PATH)/lib
 
 ifeq ($(debug),y)
@@ -45,10 +45,11 @@ LDFLAGS+=-Wl,--no-as-needed
 
 #=====================================================================================================
 
-PROTOC = $(SRC_BASE_PATH)/third_party/protobuf/bin/protoc
+PROTOC = $(SRC_BASE_PATH)/deps_src/protobuf/bin/protoc
 PROTOS_PATH = .
 GRPC_CPP_PLUGIN = grpc_cpp_plugin
-GRPC_CPP_PLUGIN_PATH ?= `which $(GRPC_CPP_PLUGIN)`
+#GRPC_CPP_PLUGIN_PATH ?= `which $(GRPC_CPP_PLUGIN)`
+GRPC_CPP_PLUGIN_PATH ?= $(SRC_BASE_PATH)/deps_prefix/bin/grpc_cpp_plugin
 NANOPB_PLUGIN_PATH=$(NANOPBPATH)/generator/protoc-gen-nanopb
 
 vpath %.proto $(PROTOS_PATH)
