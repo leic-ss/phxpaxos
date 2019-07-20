@@ -11,8 +11,6 @@ message(STATUS "CMAKE_SOURCE_DIR : " ${CMAKE_SOURCE_DIR})
 message(STATUS "PROJECT_SOURCE_DIR : " ${PROJECT_SOURCE_DIR})
 message(STATUS "PROJECT_BINARY_DIR : " ${PROJECT_BINARY_DIR})
 
-# AUX_SOURCE_DIRECTORY(${SSCORE_COMMON_SRC_PATH} SSCORE_COMMON_SRC)
-
 set(ROOT_SRC ${PROJECT_SOURCE_DIR}/src)
 set(DEPS_PREFIX_PATH ${PROJECT_SOURCE_DIR}/deps_prefix)
 set(ROOT_PLUGIN ${PROJECT_SOURCE_DIR}/plugin)
@@ -77,8 +75,14 @@ set(FULL_BUILD_DEPS
     ${GRPC_LIBRARIES}
     ${LIBPTHREAD}
    	${LIBRT}
-    ${DEPS_PREFIX_PATH}/lib/libevent.a
+    ${DEPS_PREFIX_PATH}/lib/libglog.a
+    ${DEPS_PREFIX_PATH}/lib/libgflags.a
+    ${DEPS_PREFIX_PATH}/lib/libleveldb.a
 )
+
+set(SAMPLE_BUILD_DEPS
+    ${CMAKE_CURRENT_BINARY_DIR}/src/libphxpaxos.a
+    ${CMAKE_CURRENT_BINARY_DIR}/plugin/libphxpaxos_plugin.a)
 
 EXECUTE_PROCESS(COMMAND git describe --abbrev=0 --always OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE GIT_VERSION)
 message(STATUS "GIT_VERSION: " ${GIT_VERSION})
@@ -108,3 +112,4 @@ add_library(PROTOS_OBJ OBJECT ${PROTOS_SRC})
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/src src)
 add_subdirectory(${PROJECT_SOURCE_DIR}/plugin plugin)
+add_subdirectory(${PROJECT_SOURCE_DIR}/sample sample)

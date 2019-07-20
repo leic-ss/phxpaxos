@@ -48,7 +48,11 @@ set(PHXPAXOS_SRC ${CHECKPOINT_SRC}
                  ${LOGSTORAGE_SRC}
                  ${MASTER_SRC}
                  ${NODE_SRC}
-                 $<TARGET_OBJECTS:ALGORITHM_OBJ>)
+                 ${SM_BASE_SRC}
+                 ${UTILS_SRC}
+                 $<TARGET_OBJECTS:ALGORITHM_OBJ>
+                 $<TARGET_OBJECTS:PROTOS_OBJ>)
+add_library(PHXPAXOS_OBJ OBJECT ${PHXPAXOS_SRC})
 
 add_library(phxpaxos STATIC ${PHXPAXOS_SRC})
 target_link_libraries(phxpaxos ${FULL_BUILD_DEPS})

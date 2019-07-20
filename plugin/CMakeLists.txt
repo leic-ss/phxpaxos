@@ -12,6 +12,7 @@ message(STATUS "MONITOR_SRC: ${MONITOR_SRC}")
 
 set(PHXPAXOS_PLUGIN_SRC ${MONITOR_SRC}
                         $<TARGET_OBJECTS:LOGGER_GOOGLE_OBJ>)
+add_library(PHXPAXOS_PLUGIN_OBJ OBJECT ${PHXPAXOS_PLUGIN_SRC})
 
 add_library(phxpaxos_plugin STATIC ${PHXPAXOS_PLUGIN_SRC})
 target_link_libraries(phxpaxos_plugin ${FULL_BUILD_DEPS})
