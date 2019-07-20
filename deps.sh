@@ -84,20 +84,69 @@ function do-make_install()
     make install "$@"
 }
 
-# function protobuf()
-# {
-#     if [ -f ${deps_prefix}/lib/libprotobuf.a ];then
-#         echo "protobuf alrady been builded, skip!"
-#         return
-#     fi
+function protobuf()
+{
+    if [ -f ${deps_prefix}/lib/libprotobuf.a ];then
+        echo "protobuf alrady been builded, skip!"
+        return
+    fi
 
-#     cd $deps_src/$FUNCNAME
-#     ./autogen.sh
-#     do-configure
-#     do-make CFLAGS='-Wno-implicit-fallthrough -Werror=switch'
-#     cd $work_dir
-# }
-# protobuf
+    cd $deps_src/$FUNCNAME
+
+    exist_gmock_dir="../gmock";
+    if [ -d $exist_gmock_dir ]; then
+        if [ ! -d gmock ]; then
+            cp -r $exist_gmock_dir gmock;
+        fi
+    fi
+
+    ./autogen.sh
+    do-configure CXXFLAGS=-fPIC
+    do-make
+    cd $work_dir
+}
+protobuf
+
+function leveldb() 
+{
+    if [ -f ${deps_prefix}/lib/libleveldb.a ];then
+        echo "leveldb alrady been builded, skip!"
+        return
+    fi
+
+    cd $deps_src/$FUNCNAME
+    do-cmake
+    cd $work_dir
+}
+leveldb
+
+function gflags() 
+{
+    if [ -f ${deps_prefix}/lib/libgflags.a ];then
+        echo "gflags alrady been builded, skip!"
+        return
+    fi
+
+    cd $deps_src/$FUNCNAME
+    CMAKE_CXX_FLAGS=-fPIC do-cmake
+    cd $work_dir
+}
+gflags
+
+function glog() 
+{
+    if [ -f ${deps_prefix}/lib/libglog.a ];then
+        echo "glog alrady been builded, skip!"
+        return
+    fi
+
+    cd $deps_src/$FUNCNAME
+    ./autogen.sh
+    do-configure CXXFLAGS=-fPIC --with-gflags=$deps_prefix;
+    do-make CFLAGS='-Wno-implicit-fallthrough -Werror=switch'
+    cd $work_dir
+}
+glog
 
 function grpc()
 {
@@ -122,19 +171,3 @@ function grpc()
     cd $work_dir
 }
 grpc
-
-# function libevent()
-# {
-#     if [ -f ${deps_prefix}/lib/libevent.a ];then
-#         echo "libevent alrady been builded, skip!"
-#         return
-#     fi
-
-#     cd $deps_src/$FUNCNAME
-#     ./autogen.sh
-#     do-configure
-#     do-make
-#     cd $work_dir
-# }
-# libevent
-
