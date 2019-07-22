@@ -87,7 +87,8 @@ int PhxEchoServer :: RunPaxos()
 
     //use logger_google to print log
     LogFunc pLogFunc;
-    ret = LoggerGoogle :: GetLogger("phxecho", "./log", 3, pLogFunc);
+    std::string path = "./log_" + std::to_string(m_oMyNode.GetPort());
+    ret = LoggerGoogle :: GetLogger("phxecho", path.c_str(), 3, pLogFunc);
     if (ret != 0)
     {
         printf("get logger_google fail, ret %d\n", ret);
