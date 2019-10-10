@@ -128,6 +128,7 @@ int Instance :: Init()
 void Instance :: Start()
 {
     //start learner sender
+    printf("Instance :: Start\n");
     m_oLearner.StartLearnerSender();
     //start ioloop
     m_oIOLoop.start();

@@ -26,6 +26,7 @@ See the AUTHORS file for names of contributors.
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include "logs.h"
 
 using namespace phxpaxos;
 using namespace std;
@@ -86,17 +87,13 @@ int PhxEchoServer :: RunPaxos()
     oOptions.vecGroupSMInfoList.push_back(oSMInfo);
 
     //use logger_google to print log
-    LogFunc pLogFunc;
-    std::string path = "./log_" + std::to_string(m_oMyNode.GetPort());
-    ret = LoggerGoogle :: GetLogger("phxecho", path.c_str(), 3, pLogFunc);
-    if (ret != 0)
+    std::string path = "./log." + std::to_string(m_oMyNode.GetPort()) ;
+    bool rc = Logger::initLogger(path);
+    if (!rc)
     {
-        printf("get logger_google fail, ret %d\n", ret);
-        return ret;
+        printf("initLogger fail!");
+        return -1;
     }
-
-    //set logger
-    oOptions.pLogFunc = pLogFunc;
 
     ret = Node::RunNode(oOptions, m_poPaxosNode);
     if (ret != 0)
@@ -130,6 +127,8 @@ int PhxEchoServer :: Echo(const std::string & sEchoReqValue, std::string & sEcho
         printf("echo sm excute fail, excuteret %d\n", oEchoSMCtx.iExecuteRet);
         return oEchoSMCtx.iExecuteRet;
     }
+
+    printf("echo sm excute success, llInstanceID %lu\n", llInstanceID);
 
     sEchoRespValue = oEchoSMCtx.sEchoRespValue.c_str();
 

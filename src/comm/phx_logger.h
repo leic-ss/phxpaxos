@@ -29,7 +29,7 @@ See the AUTHORS file for names of contributors.
 namespace phxpaxos
 {
 
-#define LOGGER (Logger::Instance())
+#define LOGGER (PhxLogger::Instance())
 #define LOG_ERROR(format, args...)\
        LOGGER->LogError(format, ## args);
 #define LOG_STATUS(format, args...)\
@@ -43,13 +43,13 @@ namespace phxpaxos
 #define LOG_SHOWY(format, args...)\
        LOGGER->LogShowy(format, ## args);
 
-class Logger
+class PhxLogger
 {
 public:
-    Logger();
-    ~Logger();
+    PhxLogger();
+    ~PhxLogger();
 
-    static Logger * Instance();
+    static PhxLogger * Instance();
 
     void InitLogger(const LogLevel eLogLevel);
 

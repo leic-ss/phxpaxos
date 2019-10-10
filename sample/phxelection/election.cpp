@@ -26,6 +26,7 @@ See the AUTHORS file for names of contributors.
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include "logs.h"
 
 using namespace phxpaxos;
 using namespace std;
@@ -91,6 +92,19 @@ int PhxElection :: RunPaxos()
     oOptions.vecGroupSMInfoList.push_back(oSMInfo);
     oOptions.bOpenChangeValueBeforePropose = true;
     oOptions.pMasterChangeCallback = PhxElection::OnMasterChange;
+
+    //use logger_google to print log
+    LogFunc pLogFunc;
+    std::string path = "./log." + std::to_string(m_oMyNode.GetPort());
+    bool rc = Logger::initLogger(path);
+    if (!rc)
+    {
+        printf("initLogger fail!");
+        return -1;
+    }
+
+    //set logger
+    oOptions.pLogFunc = pLogFunc;
 
     ret = Node::RunNode(oOptions, m_poPaxosNode);
     if (ret != 0)

@@ -53,6 +53,7 @@ void LearnerSender :: run()
 
     while (true)
     {
+        printf("Learner.Sender [START]\n");
         WaitToSend();
 
         if (m_bIsEnd)
