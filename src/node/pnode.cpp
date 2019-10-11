@@ -129,14 +129,14 @@ int PNode :: InitNetWork(const Options & oOptions, NetWork *& poNetWork)
 int PNode :: CheckOptions(const Options & oOptions)
 {
     //init logger
-    if (oOptions.pLogFunc != nullptr)
-    {
-        LOGGER->SetLogFunc(oOptions.pLogFunc);
-    }
-    else
-    {
-        LOGGER->InitLogger(oOptions.eLogLevel);
-    }
+    // if (oOptions.pLogFunc != nullptr)
+    // {
+    //     LOGGER->SetLogFunc(oOptions.pLogFunc);
+    // }
+    // else
+    // {
+    //     LOGGER->InitLogger(oOptions.eLogLevel);
+    // }
     
     if (oOptions.poLogStorage == nullptr && oOptions.sLogStoragePath.size() == 0)
     {

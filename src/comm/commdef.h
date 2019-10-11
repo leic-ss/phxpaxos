@@ -27,7 +27,6 @@ See the AUTHORS file for names of contributors.
 #include "inside_options.h"
 #include "phxpaxos/def.h"
 #include <string>
-#include "phx_logger.h"
 #include "logs.h"
 
 using std::string;

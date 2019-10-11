@@ -22,9 +22,12 @@ See the AUTHORS file for names of contributors.
 #pragma once
 
 #include <map>
+#include <queue>
+#include <vector>
 #include <sys/epoll.h>
 #include "timer.h"
 #include "notify.h"
+#include "socket.h"
 
 namespace phxpaxos
 {

@@ -93,7 +93,7 @@ void MasterMgr :: run()
             return;
         }
         
-        int iLeaseTime = m_iLeaseTime;
+        int iLeaseTime =  m_iLeaseTime;
 
         uint64_t llBeginTime = Time::GetSteadyClockMS();
         
@@ -114,7 +114,7 @@ void MasterMgr :: run()
         int iRunTime = llEndTime > llBeginTime ? llEndTime - llBeginTime : 0;
         int iNeedSleepTime = iContinueLeaseTimeout > iRunTime ? iContinueLeaseTimeout - iRunTime : 0;
 
-        PLG1Imp("TryBeMaster, sleep time %dms", iNeedSleepTime);
+        PLG1Imp("TryBeMaster, sleep time %dms m_iLeaseTime: %dms", iNeedSleepTime, m_iLeaseTime);
         Time::MsSleep(iNeedSleepTime);
     }
 }
