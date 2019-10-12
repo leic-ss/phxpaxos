@@ -434,7 +434,7 @@ void Instance :: OnReceive(const std::string & sBuffer)
         {
             return;
         }
-        
+
         OnReceivePaxosMsg(oPaxosMsg);
     }
     else if (iCmd == MsgCmd_CheckpointMsg)
@@ -618,7 +618,7 @@ int Instance :: ReceiveMsgForAcceptor(const PaxosMsg & oPaxosMsg, const bool bIs
 
         ReceiveMsgForLearner(oNewPaxosMsg);
     }
-            
+
     if (oPaxosMsg.instanceid() == m_oAcceptor.GetInstanceID())
     {
         if (oPaxosMsg.msgtype() == MsgType_PaxosPrepare)

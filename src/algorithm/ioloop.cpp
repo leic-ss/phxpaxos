@@ -197,7 +197,9 @@ void IOLoop :: OneLoop(const int iTimeoutMs)
             m_poInstance->OnReceive(*psMessage);
         }
 
-        delete psMessage;
+        if(psMessage) {
+            delete psMessage;
+        }
 
         BP->GetIOLoopBP()->OutQueueMsg();
     }

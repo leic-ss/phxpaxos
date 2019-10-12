@@ -231,16 +231,17 @@ int Acceptor :: OnPrepare(const PaxosMsg & oPaxosMsg)
     oReplyPaxosMsg.set_msgtype(MsgType_PaxosPrepareReply);
 
     BallotNumber oBallot(oPaxosMsg.proposalid(), oPaxosMsg.nodeid());
-    
     if (oBallot >= m_oAcceptorState.GetPromiseBallot())
     {
         PLGDebug("[Promise] State.PromiseID %lu State.PromiseNodeID %lu "
-                "State.PreAcceptedID %lu State.PreAcceptedNodeID %lu",
+                "State.PreAcceptedID %lu State.PreAcceptedNodeID %lu "
+                "oPaxosMsg.proposalid %lu oPaxosMsg.nodeid %lu",
                 m_oAcceptorState.GetPromiseBallot().m_llProposalID, 
                 m_oAcceptorState.GetPromiseBallot().m_llNodeID,
                 m_oAcceptorState.GetAcceptedBallot().m_llProposalID,
-                m_oAcceptorState.GetAcceptedBallot().m_llNodeID);
-        
+                m_oAcceptorState.GetAcceptedBallot().m_llNodeID,
+                oPaxosMsg.proposalid(), oPaxosMsg.nodeid());
+
         oReplyPaxosMsg.set_preacceptid(m_oAcceptorState.GetAcceptedBallot().m_llProposalID);
         oReplyPaxosMsg.set_preacceptnodeid(m_oAcceptorState.GetAcceptedBallot().m_llNodeID);
 
