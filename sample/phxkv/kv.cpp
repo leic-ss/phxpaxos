@@ -21,7 +21,7 @@ See the AUTHORS file for names of contributors.
 
 #include "kv.h"
 #include "phxkv.pb.h"
-#include "log.h"
+#include "commdef.h"
 
 using namespace phxpaxos;
 using namespace std;
@@ -130,6 +130,7 @@ KVClientRet KVClient :: Set(const std::string & sKey, const std::string & sValue
     KVClientRet ret = Get(sKey, sServerValue, llServerVersion);
     if (ret != KVCLIENT_OK && ret != KVCLIENT_KEY_NOTEXIST)
     {
+        PLErr("Set version conflict! key[%s] llServerVersion[%lu] llVersion[%lu]", sKey.c_str(), llServerVersion, llVersion);
         return KVCLIENT_SYS_FAIL;
     }
 

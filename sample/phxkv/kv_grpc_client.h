@@ -58,7 +58,7 @@ public:
             std::string & sValue, 
             uint64_t & llVersion);
 
-    int Delete( 
+    int Delete(
             const std::string & sKey, 
             const uint64_t llVersion,
             const int iDeep = 0);

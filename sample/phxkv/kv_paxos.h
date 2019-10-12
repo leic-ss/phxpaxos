@@ -26,7 +26,7 @@ See the AUTHORS file for names of contributors.
 #include <string>
 #include <vector>
 #include "phxpaxos_plugin/logger_google.h"
-#include "log.h"
+#include "commdef.h"
 #include "def.h"
 
 namespace phxkv

@@ -23,7 +23,7 @@ See the AUTHORS file for names of contributors.
 #include <iostream>
 #include <memory>
 #include <string>
-#include "log.h"
+#include "commdef.h"
 
 #include <grpc++/grpc++.h>
 
@@ -112,17 +112,18 @@ int main(int argc, char ** argv)
     string sKVDBPath = argv[4];
     string sPaxosLogPath = argv[5];
 
-    int ret = LOGGER->Init("phxkv", "./log", 3);
-    if (ret != 0)
+    std::string path = "./log." + std::to_string(oMyNode.GetPort());
+    bool rc = Logger::initLogger(path);
+    if (!rc)
     {
-        printf("server log init fail, ret %d\n", ret);
-        return ret;
+        printf("initLogger fail!");
+        return -1;
     }
 
     NLDebug("server init start.............................");
 
     PhxKVServiceImpl oPhxKVServer(oMyNode, vecNodeInfoList, sKVDBPath, sPaxosLogPath);
-    ret = oPhxKVServer.Init();
+    int ret = oPhxKVServer.Init();
     if (ret != 0)
     {
         printf("server init fail, ret %d\n", ret);

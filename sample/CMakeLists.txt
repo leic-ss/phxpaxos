@@ -42,7 +42,6 @@ set(PHXKV_SERVER_SRC ${ROOT_SAMPLE}/phxkv/kv.cpp
                      ${ROOT_SAMPLE}/phxkv/kv_grpc_server_main.cpp
                      ${ROOT_SAMPLE}/phxkv/kv_paxos.cpp
                      ${ROOT_SAMPLE}/phxkv/kvsm.cpp
-                     ${ROOT_SAMPLE}/phxkv/log.cpp
                      $<TARGET_OBJECTS:PROTOS_PHXKV_OBJ>)
 
 add_executable(phxkv_server ${PHXKV_SERVER_SRC})

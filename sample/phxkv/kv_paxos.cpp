@@ -93,7 +93,7 @@ int PhxKV :: RunPaxos()
     }
 
     //set logfunc
-    oOptions.pLogFunc = LOGGER->GetLogFunc();
+    //oOptions.pLogFunc = LOGGER->GetLogFunc();
 
     int ret = Node::RunNode(oOptions, m_poPaxosNode);
     if (ret != 0)
@@ -130,9 +130,11 @@ int PhxKV :: KVPropose(const std::string & sKey, const std::string & sPaxosValue
     int ret = m_poPaxosNode->Propose(iGroupIdx, sPaxosValue, llInstanceID, &oCtx);
     if (ret != 0)
     {
-        PLErr("paxos propose fail, key %s groupidx %d ret %d", iGroupIdx, ret);
+        PLErr("paxos propose fail, key %s groupidx %d ret %d", sKey.c_str(), iGroupIdx, ret);
         return ret;
     }
+
+    PLImp("paxos propose success, key %s groupidx %d ret %d", sKey.c_str(), iGroupIdx, ret);
 
     return 0;
 }

@@ -21,7 +21,7 @@ See the AUTHORS file for names of contributors.
 
 #include "kvsm.h"
 #include "phxkv.pb.h"
-#include "log.h"
+#include "commdef.h"
 #include <algorithm>
 
 using namespace phxpaxos;
