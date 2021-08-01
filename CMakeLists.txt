@@ -78,7 +78,8 @@ set(FULL_BUILD_DEPS
    	${LIBRT}
     ${DEPS_PREFIX_PATH}/lib/libglog.a
     ${DEPS_PREFIX_PATH}/lib/libgflags.a
-    ${DEPS_PREFIX_PATH}/lib/libleveldb.a
+    ${DEPS_PREFIX_PATH}/lib64/libleveldb.a
+    /media/sf_Shares/snappy/build/libsnappy.a
 )
 
 set(SAMPLE_BUILD_DEPS

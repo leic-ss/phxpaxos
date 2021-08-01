@@ -113,12 +113,8 @@ int main(int argc, char ** argv)
     string sPaxosLogPath = argv[5];
 
     std::string path = "./log." + std::to_string(oMyNode.GetPort());
-    bool rc = Logger::initLogger(path);
-    if (!rc)
-    {
-        printf("initLogger fail!");
-        return -1;
-    }
+    nds::CCLogger* ll = nds::CCLogger::instance();
+    ll->setFileName(path.c_str());
 
     NLDebug("server init start.............................");
 

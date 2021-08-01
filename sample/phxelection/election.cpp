@@ -96,12 +96,8 @@ int PhxElection :: RunPaxos()
     //use logger_google to print log
     LogFunc pLogFunc;
     std::string path = "./log." + std::to_string(m_oMyNode.GetPort());
-    bool rc = Logger::initLogger(path);
-    if (!rc)
-    {
-        printf("initLogger fail!");
-        return -1;
-    }
+    nds::CCLogger* ll = nds::CCLogger::instance();
+    ll->setFileName(path.c_str());
 
     //set logger
     oOptions.pLogFunc = pLogFunc;
